@@ -90,3 +90,9 @@ app.use((err,req,res,next)=>{
     console.error(err.stack);
     res.status(500).json({error: "Interval Server Error. "});
 });
+
+// Server 
+
+app.listen(5100,()=>{
+    console.log("Server is running on http://localhost:5100");
+});
