@@ -49,4 +49,12 @@ app.get("/users/:id", (req,res)=>{
     res.status(200).json({message: "User fetched successfully", user});
 });
 
-// 
+// POST /user - add new user (with validation)
+app.post("/user", validateUser, (req,res)=>{
+    const {firstName, lastName, hobby} = req.body;
+    const newUser = {id: Date.now().toString(), firstName,lastName,hobby};
+    users.push(newUser);
+    res.status(201).json({message: "User created successfully", user: newUser});
+});
+
+
