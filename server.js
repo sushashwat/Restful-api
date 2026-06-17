@@ -18,7 +18,7 @@ let users = [
 app.use((req,res,next)=>{
     const originalJson = res.json.bind(res);
     res.json = (body) =>{
-        console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}  → {res.statusCode}`);
+        console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}  → ${res.statusCode}`);
         return originalJson(body);
     };
     next();
@@ -61,7 +61,7 @@ app.post("/user", validateUser, (req,res)=>{
 app.put("/user/:id", validateUser, (req,res)=>{
     const index = users.findIndex((u) => u.id === req.params.id);
     if(index === -1){
-        return res.status(404).json({error: `User with id $ {req.params.id} not found.`});
+        return res.status(404).json({error: `User with id ${req.params.id} not found.`});
     }
     const {firstName, lastName, hobby} = req.body;
     users[index] = {id: req.params.id, firstName, lastName, hobby};
@@ -72,9 +72,9 @@ app.put("/user/:id", validateUser, (req,res)=>{
 app.delete("/user/:id", (req,res)=> {
     const index = users.findIndex((u)=> u.id === req.params.id);
     if(index === -1){
-        return res.status(404).json({error: `User with id ${re.params.id} not found.`});
+        return res.status(404).json({error: `User with id ${req.params.id} not found.`});
     }
-    const deleteUser = users.splice(index,1)[0];
+    const deletedUser = users.splice(index,1)[0];
     res.status(200).json({message:"User deleted successfully", user:deletedUser});
 });
 
@@ -82,7 +82,7 @@ app.delete("/user/:id", (req,res)=> {
 
 //404 - route not found 
 app.use((req,res)=>{
-    res.status(404).json({error: `Route $(req.method) ${req.url} not found.`});
+    res.status(404).json({error: `Route ${req.method} ${req.url} not found.`});
 });
 
 // 500 - unexpected server error 
