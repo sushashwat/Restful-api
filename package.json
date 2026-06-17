@@ -13,9 +13,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/sushashwat/Restful-api/issues"
   },
-  "homepage": "https://github.com/sushashwat/Restful-api#readme"
+  "homepage": "https://github.com/sushashwat/Restful-api#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
